@@ -1,26 +1,32 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Box : MonoBehaviour
 {
+    [Header("BOX PROPERTIES")]
+    [Tooltip("Should match BoxToUISpriteMapping")]
     public string code;
-
-    private float health = 3;
-    public bool canTakeDamage = true;
-    [SerializeField] private TMP_Text collisionText;
-
+    
     [SerializeField] private float weight = 1;
     public float Weight => weight;
-
+    
     [SerializeField]
     private float capacity;
-
+    
+    [Tooltip("Should be constant across all box instances")]
     [SerializeField] private float capacityExceededDamageTime = 1f;
 
+    private float health = 3;
+    
+    public bool canTakeDamage = true;
+    
+    [SerializeField]
+    private Sprite[] boxDamageSprites = new Sprite[3];
+    
+    [Header("TEMPORARY")]
+    [SerializeField] private TMP_Text collisionText;
     private float currentStackWeight;
 
     private Rigidbody2D rb;
@@ -43,8 +49,8 @@ public class Box : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collisionText.text = "" + health;
-        time = capacityExceededDamageTime;
         origGFXColor = gfx.color;
+        gfx.sprite = boxDamageSprites[0];
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -111,10 +117,6 @@ public class Box : MonoBehaviour
     
     private void Update()
     {
-        //TODO: Keeping track of colliders that are in contact with box
-        //TODO: Figure out stack mechanics, should the box instantly lose health when its weight is exceeded?
-        //TODO: How to calculate stacks, counting boxes above current box but not below?
-
         if (!capacityExceeded) return;
         
         time += Time.deltaTime;
@@ -143,7 +145,7 @@ public class Box : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
     }
 
-    public void TakeDamage()
+    private void TakeDamage()
     {
         if (!canTakeDamage) return;
         Vector2 minBounds = BoxManager.instance.boxDamageableAreaMinBounds;
@@ -159,17 +161,19 @@ public class Box : MonoBehaviour
             Destroy(gameObject);
         switch (health)
         {
-            case 2: //Switch Sprites
+            case 2:
+                gfx.sprite = boxDamageSprites[1];
                 break;
-            case 1: //Switch Sprites
+            case 1:
+                gfx.sprite = boxDamageSprites[2];
                 break;
             case 0:
                 Destroy(gameObject);
                 break;
-            default: //Play sound?
+            default: //TODO: Play sound?
                 break;
         }
 
-        collisionText.text = "" + health;
+        collisionText.text = $"{health}";
     }
 }

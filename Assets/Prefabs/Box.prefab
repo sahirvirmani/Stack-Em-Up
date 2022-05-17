@@ -418,9 +418,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   code: br
-  canTakeDamage: 1
-  collisionText: {fileID: 1223657042}
   weight: 1
   capacity: 3
   capacityExceededDamageTime: 1
+  canTakeDamage: 1
+  boxDamageSprites:
+  - {fileID: 21300000, guid: c4859ad5b57fc7e439ce3cb72c0bc86e, type: 3}
+  - {fileID: 21300000, guid: 464d68d0a3014d943a39e0d5eafe5112, type: 3}
+  - {fileID: 21300000, guid: 6591125baa110d149934eb0f41a544a3, type: 3}
+  collisionText: {fileID: 1223657042}
   gfx: {fileID: 5977173816765148472}
