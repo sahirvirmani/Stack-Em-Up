@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fd97e538d7420499bbf27cd78c7caf, type: 3}
+  m_Name: BoxToSprite
+  m_EditorClassIdentifier: 
+  boxSprites:
+  - boxCode: br
+    boxSprite: {fileID: 21300000, guid: 3f2bf530feb75d545baef1ee90149b69, type: 3}
+  - boxCode: gr
+    boxSprite: {fileID: 21300000, guid: c01b633410f221c46b8c33160d4c3b0a, type: 3}
+  - boxCode: bl
+    boxSprite: {fileID: 21300000, guid: b5b4c9b0eea3a76458be93892ff40035, type: 3}
